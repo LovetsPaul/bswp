@@ -1,0 +1,48 @@
+@import "bourbon"
+@import "vars.sass"
+
+
+.h-veduschie
+	padding-bottom: 20px
+.h-veduschi	
+	display: flex
+	justify-content: center
+	margin-bottom: 15px
+	text-align: center
+	&__photo
+		position: relative
+		img
+
+			border: 5px solid #fff
+			overflow: hidden
+			width: 125px
+			border-radius: 10em
+			height: 125px
+		&::before
+			content: ''
+			position: absolute
+			width: 83px
+			height: 56px
+			background: url(../img/bang-show-logo_s.png) no-repeat
+			top: -20px
+			right: -20px
+			z-index: 2
+	&__content
+		padding-left: 25px
+		text-align: left
+		&-name
+			text-align: left
+			margin-top: 5px
+			margin-bottom: 5px
+			padding-top: 12px
+			color: #fff
+			a
+				color: #fff
+				transition: color 0.2s ease
+				&:hover
+					color: $orange
+		&-descr
+			font-size: 14px
+			color: $text-color
+			font-family: $text-bold
+		

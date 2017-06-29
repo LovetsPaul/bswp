@@ -1,0 +1,156 @@
+@import "bourbon"
+
+/*==========  Desktop First Method  ==========*/
+
+/* Large Devices, Wide Screens */
+@media only screen and (max-width : 1391px)
+	.h-juri-list__item,
+	.h-juri-list__item h4,
+	.h-juri-list__item-descr
+		text-align: center
+@media only screen and (max-width : 1200px)
+	.main
+		background: #fff
+		background-image: none
+	/**/
+
+@media only screen and (max-width : 1093px)
+	.nav-panel
+		.social-links
+			margin-top: 35px
+/* Medium Devices, Desktops */
+@media only screen and (max-width : 992px)
+	/**/
+	.nav-panel
+		background-image: url(../img/parket-mobile.jpg)
+	.stage
+		background-image: url(../img/stage-mobile.jpg)
+		box-shadow: 0 1px 17px rgba(0,0,0,0.5);
+	h1.stage__text
+		font-size: 50px
+
+	.footer
+		.contacts-phone,
+		.f-social
+			margin-top: 20px
+
+	.sircle-section
+		&__item
+			flex: 100%
+
+/* Small Devices, Tablets */
+@media only screen and (max-width : 768px)
+	.stage__logo 
+		img
+			width: 44vh
+			top: 50vh
+
+	h1.stage__text
+		font-size: 36px
+		top: 60vh
+	.h-juri-list
+		&__item
+			width: 49%
+			margin-bottom: 10px
+		&__item-descr
+			text-align: center
+	.h-bloggers
+		&-list
+			flex-wrap: wrap
+		&-item
+			margin-top: 30px
+			flex: 30%
+	.chess-row
+		flex-wrap: wrap
+		flex-direction: column-reverse
+		&__img
+			max-width: 100%
+			min-height: auto
+		&__img,
+		&__text
+			flex: 100%
+	.h-girl-container
+		height: 400px	
+	.list-title
+		background: none
+	.people-list
+		.social-links
+			float: none
+			text-align: center
+	.contacts
+		&__phone,
+		&__address,
+		&__email
+			flex: 100%
+	/*Disable Animation on Mobile Devices*/
+	.animated
+		/*CSS transitions*/
+		-o-transition-property: none !important
+		-moz-transition-property: none !important
+		-ms-transition-property: none !important
+		-webkit-transition-property: none !important
+		transition-property: none !important
+		/*CSS transforms*/
+		-o-transform: none !important
+		-moz-transform: none !important
+		-ms-transform: none !important
+		-webkit-transform: none !important
+		transform: none !important
+		/*CSS animations*/
+		-webkit-animation: none !important
+		-moz-animation: none !important
+		-o-animation: none !important
+		-ms-animation: none !important
+		animation: none !important
+
+@media only screen and (max-width : 740px)
+	.main
+		background-image: url(../img/triangle-bgX740.jpg)
+/* Extra Small Devices, Phones */
+@media only screen and (max-width : 480px)
+	.main
+		background-image: url(../img/triangle-bgX480.jpg)
+	/**/
+
+	.h-juri-list
+		&__item
+			width: 100%
+	.footer
+		.f-social
+			font-size: 15px
+		.registration
+			margin-top: 40px
+			text-align: center
+	.f-menu
+		display: none
+/* Custom, iPhone Retina */
+@media only screen and (max-width : 320px)
+	/**/
+
+
+/*==========  Mobile First Method  ==========*/
+
+/* Custom, iPhone Retina */
+@media only screen and (min-width : 320px)
+	/**/
+
+
+/* Extra Small Devices, Phones */
+@media only screen and (min-width : 480px)
+	/**/
+
+
+/* Small Devices, Tablets */
+@media only screen and (min-width : 768px)
+	/**/
+
+
+/* Medium Devices, Desktops */
+@media only screen and (min-width : 992px)
+	/**/
+
+
+/* Large Devices, Wide Screens */
+@media only screen and (min-width : 1200px)
+	/**/
+
