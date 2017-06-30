@@ -1,5 +1,6 @@
-@import "bourbon"
+/* Theme Name: styl_s Theme URI: https://github.com/luclemo/Styl_s */
 
+@import "bourbon"
 //Load Libs SASS
 @import "../app/libs/animate.css/animate.min"
 @import "../app/libs/owl.carousel/dist/assets/owl.carousel.min"
@@ -18,30 +19,31 @@
 .image-responsive
 	max-width: 100%
 /*Include Section Sass style*/
-@import "preloader"
-@import "typography"
-@import "header"
-@import "buttons"
-@import "for-all-section"
-@import "nav-panel"
-@import "h-about"
-@import "h-kasting"
-@import "h-juri"
-@import "h-veduschie"
-@import "h-special-guests"
-@import "h-junity"
-@import "h-bloggers"
-@import "h-bang-music"
-@import "h-bang-girl"
-@import "h-bottom"
-@import "footer"
 
-@import "page-mentory"
-@import "page-bang-music"
-@import "page-bang-girl"
-@import "page-contacts"
-@import "page-junity"
-@import "veduschie"
+// @import "preloader"
+// @import "typography"
+// @import "header"
+// @import "buttons"
+// @import "for-all-section"
+// @import "nav-panel"
+// @import "h-about"
+// @import "h-kasting"
+// @import "h-juri"
+// @import "h-veduschie"
+// @import "h-special-guests"
+// @import "h-junity"
+// @import "h-bloggers"
+// @import "h-bang-music"
+// @import "h-bang-girl"
+// @import "h-bottom"
+// @import "footer"
+
+// @import "page-mentory"
+// @import "page-bang-music"
+// @import "page-bang-girl"
+// @import "page-contacts"
+// @import "page-junity"
+// @import "veduschie"
 /**/
 body
 	overflow-x: hidden
@@ -103,9 +105,12 @@ body
 	position: absolute
 	top: 70px
 	left: 10%
+
 .mobile-menu-popup-wrapp
 	width: 100vw
+	opacity: 0
 	transition: transform 0.7s ease-in-out
+	transition: opacity 0.5s linear
 	transform: translateX(-105%)
 	padding-top: 60px
 	position: fixed
@@ -141,6 +146,8 @@ body
 		padding: 50px 10px
 .mobile-menu-slide
 	transform: translateX(0)
+	opacity: 1
+	// transition: opacity 0.8s linear
 /*End Mobile Menu*/
 .mfp-arrow
 	color: $orange

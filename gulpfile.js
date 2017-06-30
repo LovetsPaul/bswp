@@ -3,13 +3,16 @@ var gulp             = require('gulp'),
 		autoprefixer = require('gulp-autoprefixer'),
 		cleanCSS     = require('gulp-clean-css'),
 		rename       = require('gulp-rename'),
+		// useref       = require('gulp-useref'),
+		// gulpif       = require('gulp-if'),
+		inlinesource = require('gulp-inline-source'),
 		browserSync  = require('browser-sync').create(),
 		concat       = require('gulp-concat');
 
 // 		uglify       = require('gulp-uglify');
 // var gutil = require( 'gulp-util' );
 // var ftp = require( 'vinyl-ftp' );
-gulp.task('browser-sync', ['styles', 'scripts'], function() {
+gulp.task('browser-sync', ['style-fonts','style-main','style-inline','style-header', 'scripts'], function() {
 		browserSync.init({
 				// server: {
 				// 		baseDir: "./"
@@ -19,15 +22,45 @@ gulp.task('browser-sync', ['styles', 'scripts'], function() {
 		});
 });
 
-gulp.task('styles', function () {
-	return gulp.src('bangshow/sass/*.sass')
+gulp.task('style-fonts', function () {
+	return gulp.src('bangshow/sass/fonts.sass')
 	.pipe(sass({
 		includePaths: require('node-bourbon').includePaths
 	}).on('error', sass.logError))
-	.pipe(concat('style.css'))
+	.pipe(rename({suffix: '.min', prefix : ''}))
 	.pipe(autoprefixer({browsers: ['last 15 versions'], cascade: false}))
-	.pipe(cleanCSS())
-	.pipe(gulp.dest('bangshow/'))
+	// .pipe(cleanCSS())
+	.pipe(gulp.dest('bangshow/css/'))
+	.pipe(browserSync.stream());
+});
+
+
+gulp.task('style-header', function () {
+	return gulp.src(['bangshow/sass/preloader.sass', 'bangshow/sass/header.sass'])
+	.pipe(sass({
+		includePaths: require('node-bourbon').includePaths
+	}).on('error', sass.logError))
+	.pipe(concat('header.min.css'))
+	.pipe(autoprefixer({browsers: ['last 15 versions'], cascade: false}))
+	//.pipe(cleanCSS())
+	.pipe(gulp.dest('bangshow/css/'))
+	.pipe(browserSync.stream());
+});
+gulp.task('style-inline', function () {
+	return gulp.src('bangshow/_header.php')
+	.pipe(inlinesource())
+	.pipe(rename('header.php'))
+	.pipe(gulp.dest('./bangshow/'));
+});
+gulp.task('style-main', function () {
+	return gulp.src(['bangshow/sass/*.sass', '!fonts.sass', '!preloader.sass', '!header.sass'])
+	.pipe(sass({
+		includePaths: require('node-bourbon').includePaths
+	}).on('error', sass.logError))
+	.pipe(concat('main.min.css'))
+	.pipe(autoprefixer({browsers: ['last 15 versions'], cascade: false}))
+	// .pipe(cleanCSS())
+	.pipe(gulp.dest('bangshow/css/'))
 	.pipe(browserSync.stream());
 });
 
@@ -46,9 +79,10 @@ gulp.task('scripts', function() {
 });
 
 gulp.task('watch', function () {
-	gulp.watch('bangshow/sass/*.sass', ['styles']);
+	gulp.watch('bangshow/sass/*.sass', ['style-fonts','style-main','style-header','style-inline']);
 	gulp.watch('bangshow/app/libs/**/*.js', ['scripts']);
 	gulp.watch('bangshow/js/*.js').on("change", browserSync.reload);
+	gulp.watch('bangshow/*.php').on("change", browserSync.reload);
 	// gulp.watch('app/*.html').on('change', browserSync.reload);
 });
 

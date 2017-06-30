@@ -1,4 +1,4 @@
-$(function() {
+jQuery(function($) {
 
 var isMobile = {
 	Android: function() {
@@ -22,7 +22,7 @@ var isMobile = {
 };
 
 var cont_top = window.pageYOffset ? window.pageYOffset : document.body.scrollTop;
-$('.stage').ready(function(){
+$(document).ready(function(){
 	$('.preloader').fadeOut('fast');
 
 	if( cont_top < 10 && !isMobile.any() && $('body').hasClass('home') && ( getCookie('isVisitedHomePage') != 'true' )){

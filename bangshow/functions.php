@@ -25,7 +25,7 @@ function bangshow_setup() {
 	load_theme_textdomain( 'bangshow', get_template_directory() . '/languages' );
 
 	// Add default posts and comments RSS feed links to head.
-	add_theme_support( 'automatic-feed-links' );
+	// add_theme_support( 'automatic-feed-links' );
 
 	/*
 	 * Let WordPress manage the document title.
@@ -44,8 +44,15 @@ function bangshow_setup() {
 
 	// This theme uses wp_nav_menu() in one location.
 	register_nav_menus( array(
-		'menu-1' => esc_html__( 'Primary', 'bangshow' ),
+		'menu-1' => esc_html__( 'Primary Top', 'bangshow' ),
+		'menu-2' => esc_html__( 'Footer 1', 'bangshow' ),
 	) );
+	
+	function add_classes_on_li($classes, $item, $args) {
+	  $classes[] = 'nav-menu__item';
+	  return $classes;
+	}
+	add_filter('nav_menu_css_class','add_classes_on_li',1,3);
 
 	/*
 	 * Switch default core markup for search form, comment form, and comments
@@ -120,6 +127,8 @@ function bangshow_scripts() {
 	wp_enqueue_style( 'bangshow-style', get_stylesheet_uri() );
 
 	wp_enqueue_script( 'bangshow-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20151215', true );
+	wp_enqueue_script( 'bangshow-libs', get_template_directory_uri() . '/js/libs.js', array('jquery'), '20151215', true );
+	wp_enqueue_script( 'bangshow-common', get_template_directory_uri() . '/js/common.js', array(), '20151215', true );
 
 	wp_enqueue_script( 'bangshow-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20151215', true );
 
@@ -153,3 +162,10 @@ require get_template_directory() . '/inc/customizer.php';
  * Load Jetpack compatibility file.
  */
 require get_template_directory() . '/inc/jetpack.php';
+/**
+ * Load Jetpack compatibility file.
+ */
+require get_template_directory() . '/inc/post-types.php';
+
+
+
