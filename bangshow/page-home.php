@@ -1,6 +1,7 @@
 <?php /* Template Name: Шаблон Главной */ ?>
 
 <?php get_header(); ?>
+
 <div class="main">
 	<div class="list">
 		<div class="h-about">
@@ -10,7 +11,6 @@
 						<h2>Афиша</h2>
 						<h3 class="with-line">О проекте</h3>
 						<div class="h-about__text">
-						<?php echo do_shortcode('[profilepress-login id="1"]' ); ?>
 							<p>Мы рады сообщить вам реалистичный загнутый уголок страницы. Вам понадобится несколько простых техник деформации. Вы сможете создавать загнутые уголки для бумажных страниц, выбирать угол, размер изгиба и градиент.</p>
 						</div>
 					</div>
