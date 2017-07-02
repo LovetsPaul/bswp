@@ -7005,7 +7005,7 @@ body textarea:required:valid {
       color: #fff; }
 
 @charset "UTF-8";
-.post-ratings .metatextsmall {
+.post-ratings {
   font-size: 12px; }
 
 .bang-show-raiting__title {
@@ -7437,6 +7437,21 @@ body textarea:required:valid {
           color: #111111; }
     .junit-card-content__descr span, .junit-card-content__blogger span, .junit-card-content__mentor span {
       font-family: "DINPro-Black"; }
+
+.pagination {
+  text-align: center;
+  font-size: 22px; }
+  .pagination .page-numbers {
+    padding: 10px;
+    margin: 0 2px;
+    -webkit-transition: color 0.3s linear;
+    -o-transition: color 0.3s linear;
+    transition: color 0.3s linear;
+    color: #111111; }
+    .pagination .page-numbers.current, .pagination .page-numbers:hover {
+      color: #fc340f; }
+    .pagination .page-numbers.current {
+      font-family: "badaboom"; }
 
 .preloader {
   display: -webkit-box;

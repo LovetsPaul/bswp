@@ -166,6 +166,17 @@ require get_template_directory() . '/inc/jetpack.php';
  * Load Jetpack compatibility file.
  */
 require get_template_directory() . '/inc/post-types.php';
-
+/**
+ * Load Remove actions file.
+ */
+require get_template_directory() . '/inc/remove-action.php';
+/**
+ * Load Add Coulumn Posts Table file.
+ */
+require get_template_directory() . '/inc/add-columns.php';
+/**
+ * Load Add Image Size file.
+ */
+require get_template_directory() . '/inc/image-size.php';
 
 
