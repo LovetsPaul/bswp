@@ -45,12 +45,18 @@ function bangshow_setup() {
 	// This theme uses wp_nav_menu() in one location.
 	register_nav_menus( array(
 		'menu-1' => esc_html__( 'Primary Top', 'bangshow' ),
-		'menu-2' => esc_html__( 'Footer 1', 'bangshow' ),
+		'registration' => esc_html__( 'Вход/Регистрация', 'bangshow' ),
+		'footer-1' => esc_html__( 'Footer 1', 'bangshow' ),
+		'footer-2' => esc_html__( 'Footer 2', 'bangshow' ),
+		'footer-3' => esc_html__( 'Footer 3', 'bangshow' ),
 	) );
 	
 	function add_classes_on_li($classes, $item, $args) {
-	  $classes[] = 'nav-menu__item';
-	  return $classes;
+		if ( 'menu-1' === $args->theme_location ) {
+        	$classes[] = 'nav-menu__item';
+    	
+    	}
+    	return $classes;
 	}
 	add_filter('nav_menu_css_class','add_classes_on_li',1,3);
 
@@ -101,24 +107,6 @@ function bangshow_content_width() {
 	$GLOBALS['content_width'] = apply_filters( 'bangshow_content_width', 640 );
 }
 add_action( 'after_setup_theme', 'bangshow_content_width', 0 );
-
-/**
- * Register widget area.
- *
- * @link https://developer.wordpress.org/themes/functionality/sidebars/#registering-a-sidebar
- */
-function bangshow_widgets_init() {
-	register_sidebar( array(
-		'name'          => esc_html__( 'Sidebar', 'bangshow' ),
-		'id'            => 'sidebar-1',
-		'description'   => esc_html__( 'Add widgets here.', 'bangshow' ),
-		'before_widget' => '<section id="%1$s" class="widget %2$s">',
-		'after_widget'  => '</section>',
-		'before_title'  => '<h2 class="widget-title">',
-		'after_title'   => '</h2>',
-	) );
-}
-add_action( 'widgets_init', 'bangshow_widgets_init' );
 
 /**
  * Enqueue scripts and styles.
@@ -178,5 +166,24 @@ require get_template_directory() . '/inc/add-columns.php';
  * Load Add Image Size file.
  */
 require get_template_directory() . '/inc/image-size.php';
+/**
+ * Load Add Registers Sidebars file.
+ */
+require get_template_directory() . '/inc/register-sidebars.php';
+/**
+ * Load Redux Framework file.
+ */
+require get_template_directory() . '/inc/sample-config.php';
+/**
+ * Load TinyMCE settings file.
+ */
+require get_template_directory() . '/inc/tinyMCE.php';
 
+
+
+add_filter('user_contactmethods', 'my_user_contactmethods'); 
+function my_user_contactmethods($user_contactmethods){ 
+  $user_contactmethods['user_phone'] = 'Телефон'; 
+  return $user_contactmethods;
+}
 

@@ -8,7 +8,8 @@
 .h-guest-card
 	max-width: 264px
 	margin: auto
-	height: 297px
+	// height: 297px
+	height: 280px
 	background-color: #fff
 	margin-bottom: 35px
 	box-shadow: 0 0 7px rgba(0,0,0,0.5)
@@ -25,13 +26,17 @@
 		font-family: $text-main
 		line-height: 15px
 		&__title
-			margin: 0 0 15px 0
+			// margin: 0 0 15px 0
+			margin: 0
 			text-align: left
 			color: $red
 		&__descr
 			height: 46px
 			overflow: auto
 			position: relative
+.h-guest-link
+	transition: color 0.3s linear
+	color: inherit
 .s-light
 	.h-guest-card-content__title
 		color: $red

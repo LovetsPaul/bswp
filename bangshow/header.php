@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html class="no-js"  <?php language_attributes(); ?>>
 
@@ -14,11 +13,11 @@
 
 	<meta property="og:image" content="path/to/image.jpg">
 
-	<link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-touch-icon.png">
-	<link rel="icon" type="image/png" sizes="32x32" href="img/favicon/favicon-32x32.png">
-	<link rel="icon" type="image/png" sizes="16x16" href="img/favicon/favicon-16x16.png">
-	<link rel="manifest" href="img/favicon/manifest.json">
-	<link rel="mask-icon" href="img/favicon/safari-pinned-tab.svg" color="#5bbad5">
+	<link rel="apple-touch-icon" sizes="180x180" href="<?php echo get_template_directory_uri();?>/img/favicon/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="<?php echo get_template_directory_uri();?>/img/favicon/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="<?php echo get_template_directory_uri();?>/img/favicon/favicon-16x16.png">
+	<link rel="manifest" href="<?php echo get_template_directory_uri();?>/img/favicon/manifest.json">
+	<link rel="mask-icon" href="<?php echo get_template_directory_uri();?>/img/favicon/safari-pinned-tab.svg" color="#5bbad5">
 	<meta name="apple-mobile-web-app-title" content="Bang Show">
 	<meta name="application-name" content="Bang Show">
 	<meta name="theme-color" content="#ffffff">
@@ -36,18 +35,18 @@
 <!-- 	<link rel="stylesheet" href="css/fonts.min.css">
 	<link rel="stylesheet" href="css/main.min.css"> -->
 	<script>loadLocalStorageCSS( "webfonts", "<?php echo get_template_directory_uri();?>/css/fonts.min.css" );</script>
-	<script>loadCSS( "<?php echo get_template_directory_uri();?>/css/main.min.css", false, "all" );</script>
+	<script>loadCSS( "<?php echo get_template_directory_uri();?>/css/main.min.css?ver=1.0.4", false, "all" );</script>
 	<!-- Load CSS End -->
 
 	<!-- Load CSS Compiled without JS -->
 	<noscript>
-		<link rel="stylesheet" href="css/fonts.min.css">
-		<link rel="stylesheet" href="css/main.min.css">
+		<link rel="stylesheet" href="<?php echo get_template_directory_uri();?>/css/fonts.min.css">
+		<link rel="stylesheet" href="<?php echo get_template_directory_uri();?>/css/main.min.css">
 	</noscript>
 		<?php wp_head(); ?>
 </head>
 
-<body <?php body_class("oh"); ?>>
+<body <?php body_class(); ?>>
 <div class="stage">
 	<div class="stage__logo">
 		<img src="<?php echo get_template_directory_uri();?>/img/bang-show-logo_l.png" data-wow-delay="1s" class="wow bounceIn" alt="Bang Show Logo">
@@ -97,26 +96,73 @@
 		<div class="row">
 			<div class="col-md-6 hidden-sm hidden-xs">
 				<nav>
-					<ul class="registration">
-						<li><a href="#"><i class="fa fa-circle" aria-hidden="true"></i>Вход</a></li>
-						<li><a href="#"><i class="fa fa-circle" aria-hidden="true"></i>Регистрация</a></li>
-					</ul>
+					<?php 
+						$args = array(
+							'theme_location' => 'registration',
+							'menu' => '',
+							'container' => 'div',
+							'container_class' => '',
+							'container_id' => '',
+							'menu_class' => 'registration',
+							'menu_id' => '',
+							'echo' => true,
+							'fallback_cb' => 'wp_page_menu',
+							'before' => '',
+							'after' => '',
+							'link_before' => '<i class="fa fa-circle" aria-hidden="true"></i>',
+							'link_after' => '',
+							'items_wrap' => '<ul id = "%1$s" class = "%2$s">%3$s</ul>',
+							'depth' => 1,
+							'walker' => ''
+						);
+					
+						wp_nav_menu( $args ); ?>
 				</nav>
 			</div>
 			<div class="col-md-6">
 				<nav>
 					<ul class="social-links social-links_white to-right">
-						<li><a href="#"><i class="fa fa-vk" aria-hidden="true"></i></a></li>
-						<li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-						<li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-						<li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-						<li><a href="#"><i class="fa fa-youtube-play" aria-hidden="true"></i></a></li>
+						<?php global $bangshow_settings; ?>
+						<?php if($bangshow_settings['vk']): ?>
+							<li>
+								<a target="_blank" href="<?php echo $bangshow_settings['vk']; ?>">
+									<i class="fa fa-vk" aria-hidden="true"></i>
+								</a>
+							</li>
+						<?php endif; ?>
+						<?php if($bangshow_settings['fb']): ?>
+							<li>
+								<a target="_blank" href="<?php echo $bangshow_settings['fb']; ?>">
+									<i class="fa fa-facebook" aria-hidden="true"></i>
+								</a>
+							</li>
+						<?php endif; ?>
+						<?php if($bangshow_settings['tw']): ?>
+							<li>
+								<a target="_blank" href="<?php echo $bangshow_settings['tw']; ?>">
+									<i class="fa fa-twitter" aria-hidden="true"></i>
+								</a>
+							</li>
+						<?php endif; ?>
+						<?php if($bangshow_settings['instagram']): ?>
+							<li>
+								<a target="_blank" href="<?php echo $bangshow_settings['instagram']; ?>">
+									<i class="fa fa-instagram" aria-hidden="true"></i>
+								</a>
+							</li>
+						<?php endif; ?>
+						<?php if($bangshow_settings['youtube']): ?>
+							<li>
+								<a target="_blank" href="<?php echo $bangshow_settings['youtube']; ?>"><i class="fa fa-youtube-play" aria-hidden="true"></i>
+								</a>
+							</li>
+						<?php endif; ?>
 					</ul>
 				</nav>
 			</div>
 		</div>
 	</div>
 	<div id="mobile-menu" class="hidden-lg hidden-md">
-		<a href="#" class="toogle-nav"><img src="img/mobile-button.png" width="75" height="46" alt="Меню"></a>		
+		<a href="#" class="toogle-nav"><img src="<?php echo get_template_directory_uri();?>/img/mobile-button.png" width="75" height="46" alt="Меню"></a>		
 	</div>
 </div>

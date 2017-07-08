@@ -1,6 +1,11 @@
 <?php /* Template Name: Шаблон Bang Girl */ ?>
 
 <?php get_header(); ?>
+<?php
+	global $bangshow_settings;
+	$posts_per_page = $bangshow_settings['posts-per-page'];
+
+?>
 <div class="main">
 	<div class="list">
 		
@@ -8,7 +13,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-12">
-						<h2 class="list-title">Bang Girl</h2>
+						<h2 class="list-title"><?php wp_title(''); ?></h2>
 					</div>
 				</div>
 			</div>
@@ -26,12 +31,14 @@
 				</div>
 			</div>
 		</div>
-		<?php 
+		<?php
+			$paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
 			$args = array(
-				'posts_per_page' => 5,
-				'post_type' => 'bang-girl',
+				'posts_per_page' => $posts_per_page,
+				'paged'  => $paged,
+				'post_type' => 'bang-girls',
 				'r_sortby'   => 'highest_rated',
-				'r_orderby'     => 'desc'
+				'r_orderby'     => 'desc',
 			);
 
 			$query = new WP_Query( $args );
@@ -83,20 +90,12 @@
 
 						?>
 
-
-
-
 						       	<img src="<?php echo $medium_image_url; ?>"
 						       		data-thumb="<?php echo $small_image_url; ?>"
 						       		data-full="<?php echo $full_image_url; ?>"> 	
 						     <?php endforeach; ?>
 						<?php endif; ?>
 
-						<!-- <a href="img/girl.jpg" data-thumb="img/girl.jpg"></a>
-						<a href="img/roshe.png" data-thumb="img/roshe.png"></a>
-						<a href="img/roshe.png" data-thumb="img/roshe.png"></a>
-
-						<a href="img/roshe.png" data-thumb="img/roshe.png"></a> -->
 					</div>
 
 					<p class="login-descr">Чтобы оставить свой голос, пожалуйста <a href="#">войдите</a> на сайт или <a href="#">зарегистрируйтесь</a>.</p>
@@ -136,6 +135,7 @@
 				<?php endif; ?>
 
 			</div>
+			<?php endwhile; ?>
 			<div class="pagination">
 				<?php // пагинация для произвольного запроса
 					$big = 999999999; // уникальное число
@@ -155,7 +155,6 @@
 					) );
 				?>
 			</div>
-			<?php endwhile; ?>
 			<?php endif; ?>
 			<?php wp_reset_postdata();?>
 		</div>

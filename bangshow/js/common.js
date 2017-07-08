@@ -21,21 +21,31 @@ var isMobile = {
 	}
 };
 
-var cont_top = window.pageYOffset ? window.pageYOffset : document.body.scrollTop;
-$(document).ready(function(){
-	$('.preloader').fadeOut('fast');
 
-	if( cont_top < 10 && !isMobile.any() && $('body').hasClass('home') && ( getCookie('isVisitedHomePage') != 'true' )){
-		$('html, body').stop().delay(5000).animate({
-			scrollTop: $("#nav-panel").offset().top+40
-			}, 800, 'swing', function(){
 
-			$('body').delay(1000).removeClass('oh');
+
+
+$('.stage').ready(function(){
+
+	$('.preloader').fadeOut();
+
+	if( !isMobile.any()){
+
+		$(window).scroll(function(){
+
+			var cont_top = window.pageYOffset ? window.pageYOffset : document.body.scrollTop;
+			var height = $('.stage').innerHeight();
+			if(cont_top > height){
+				$('html, body').stop();
+			}
+
 		});
-		document.cookie = "isVisitedHomePage=true; path=/;";
-	}else{
 
-		$('body').removeClass('oh');
+		$('html, body').stop().delay(4000).animate({
+			scrollTop: $("#nav-panel").offset().top+40
+			}, 400, 'swing', function(){
+		});
+
 	}
 
 });
@@ -52,12 +62,12 @@ new WOW().init();
 $(document).ready(function(){
 	if(isMobile.any()){
 		$('.owl-carousel div').removeClass('col-md-4 col-sm-6 col-xs-12');
-		$('.owl-carousel img').each(function(){
+		$('.owl-carousel img').not('.post-ratings-image').each(function(){
 			var $img_src = $(this).attr('data-original');
 			console.log($img_src);
 			$(this).removeAttr('data-original').attr('data-src', $img_src);
 		});
-		$('.owl-carousel img').addClass('owl-lazy');
+		$('.owl-carousel img').not('.post-ratings-image').addClass('owl-lazy');
 		$(".owl-carousel").owlCarousel({
 				items: 3,
 				center: true,
@@ -119,11 +129,22 @@ $(document).ready(function() {
 	});
 });
 
-function getCookie(name) {
-  var matches = document.cookie.match(new RegExp(
-    "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
-  ));
-  return matches ? decodeURIComponent(matches[1]) : undefined;
-}
+$(document).ready(function() {
+	$('.popup-with-form').magnificPopup({
+		type: 'inline',
+
+		// When elemened is focused, some mobile browsers in some cases zoom in
+		// It looks not nice, so we disable it:
+		callbacks: {
+			beforeOpen: function() {
+				if($(window).width() < 700) {
+					this.st.focus = false;
+				} else {
+					this.st.focus = '#name';
+				}
+			}
+		}
+	});
+});
 
 });

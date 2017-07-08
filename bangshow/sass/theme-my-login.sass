@@ -1,0 +1,39 @@
+@import "vars"
+@import "bourbon"
+
+.tml 
+	label
+		display: block
+		font-family: $text-funny
+		color: $text-color
+form
+	margin: auto
+input
+	border: 1px solid #111
+	box-shadow: none
+	background-color: rgba($orange, 0.2)!important
+	appearance: none
+	padding: 5px 10px
+
+	&:focus
+		outline: none
+	&[type="submit"]
+		background: url(../img/button-bg.png) repeat
+		color: $text-color
+
+.tml-action-links
+	padding-left: 0
+	li
+		list-style-type: none
+		padding-left: 0
+		color: #fff
+		font-size: 20px
+		margin-right: 20px
+
+		a
+			color: $text-color
+			font-family: $text-main
+			transition: all 0.2s ease
+			&:hover
+				color: $red
+				text-decoration: none

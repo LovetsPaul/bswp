@@ -14,13 +14,16 @@
 			</div>
 		</div>
 		<div class="list-featured-image">
-			<img class="lazy image-responsive" data-original="img/mentory-with-bg.jpg" alt="Менторы">
+			<img class="lazy image-responsive" data-original="<?php echo get_template_directory_uri();?>/img/mentory-with-bg.jpg" alt="Менторы">
 		</div>
 
 
 		<?php 
 			$args = array(
-				'post_type' => 'junits'
+				'post_type' => 'junits',
+				'posts_per_page' => 25,
+				'r_sortby'   => 'highest_rated',
+				'r_orderby'     => 'desc',
 			);
 
 			$query = new WP_Query( $args );
@@ -49,8 +52,9 @@
 						</div>
 					</div>
 				</div>
+				
 				<div class="people-item-header">
-					<img class="lazy image-responsive" data-original="img/galygin.png" alt="Юниты Вадима Галыгина">
+					<img class="lazy image-responsive" data-original="<?php echo get_template_directory_uri();?>/img/galygin.png" alt="Юниты Вадима Галыгина">
 				</div>
 				<div class="junits-list owl-carousel">
 					<?php 
@@ -58,21 +62,38 @@
 							while ( $query->have_posts() ):
 								$query->the_post();
 							$id_mentors = get_field('junits_mentor');
+							
 					?>
+				
 					<?php foreach($id_mentors as $id):
+
 						if($id == 65):
+
 					?>							
-					
+						
 					<div class="col-md-4 col-sm-6 col-xs-12 ">
 						<div class="junit-card <?php if(get_post_meta( get_the_ID(), 'disable', true )){echo 'junit-disabled';} ?>">
 							
 							<div class="junit-card__photo">
-								<img class="lazy" data-original="img/guest.jpg" alt="Иванов Иван">
+							<?php 
+								$photo       = get_field('photo');
+								$photo_thumb = $photo['sizes']['junit-card-photo'];
+								$photo_alt   =  $photo['alt'];
+							?>
+								<img class="lazy" 
+									data-original="<?php echo $photo_thumb; ?>" 
+									alt="<?php echo $photo_alt; ?>">
 							</div>
 							<div class="junit-card-content">
 								<h4 class="junit-card-content__title">
 									<a href="<?php echo get_permalink(67); ?>" class="junit-page-link"><?php the_title(); ?></a>
 								</h4>
+								<div class="bang-show-raiting junit-raiting"><a class="rate_button" href="<?php echo get_permalink(67); ?>">Голосовать</a>
+									<div class="bang-show-raiting__title">Рейтинг:</div>
+									<?php if(function_exists('the_ratings')) { 
+										echo expand_ratings_template('<span class="rating">%RATINGS_IMAGES%</span><br>(<em><strong>%RATINGS_USERS%</strong> голосов, средний балл: <strong>%RATINGS_AVERAGE%</strong> из %RATINGS_MAX%</em>)', get_the_ID()); 
+									} ?>
+								</div>
 								<div class="junit-card-content__descr"><span>Состав:&nbsp;&nbsp;</span>
 									<?php $members = array();
 										if(get_post_meta( get_the_ID(), 'member_1', true )){
@@ -122,7 +143,7 @@
 					</div>
 				</div>
 				<div class="people-item-header">
-					<img class="lazy image-responsive" data-original="img/soloduha.png" alt="Юниты Александра Солодухи">
+					<img class="lazy image-responsive" data-original="<?php echo get_template_directory_uri();?>/img/soloduha.png" alt="Юниты Александра Солодухи">
 				</div>
 				<div class="junits-list owl-carousel">
 					<?php 
@@ -131,7 +152,7 @@
 								$query->the_post();
 							$id_mentors = get_field('junits_mentor');
 					?>
-
+					<?php $id_junit_post = get_the_ID(); ?>
 					<?php foreach($id_mentors as $id):
 						if($id == 36):
 					?>							
@@ -140,12 +161,18 @@
 						<div class="junit-card <?php if(get_post_meta( get_the_ID(), 'disable', true )){echo 'junit-disabled';} ?>">
 							
 							<div class="junit-card__photo">
-								<img class="lazy" data-original="img/guest.jpg" alt="Иванов Иван">
+								<img class="lazy" data-original="<?php echo get_template_directory_uri();?>/img/guest.jpg" alt="Иванов Иван">
 							</div>
 							<div class="junit-card-content">
 								<h4 class="junit-card-content__title">
 									<a href="<?php echo get_permalink(67); ?>" class="junit-page-link"><?php the_title(); ?></a>
 								</h4>
+								<div class="bang-show-raiting junit-raiting"><a class="rate_button" href="<?php echo get_permalink(67); ?>">Голосовать</a>
+									<div class="bang-show-raiting__title">Рейтинг:</div>
+									<?php if(function_exists('the_ratings')) { 
+										echo expand_ratings_template('<span class="rating">%RATINGS_IMAGES%</span><br>(<em><strong>%RATINGS_USERS%</strong> голосов, средний балл: <strong>%RATINGS_AVERAGE%</strong> из %RATINGS_MAX%</em>)', get_the_ID()); 
+									} ?>
+								</div>
 								<div class="junit-card-content__descr"><span>Состав:&nbsp;&nbsp;</span>
 									<?php $members = array();
 										if(get_post_meta( get_the_ID(), 'member_1', true )){
@@ -194,7 +221,7 @@
 					</div>
 				</div>
 				<div class="people-item-header">
-					<img class="lazy image-responsive" data-original="img/iowa.png" alt="Юниты Екатерины Иванчиковой">
+					<img class="lazy image-responsive" data-original="<?php echo get_template_directory_uri();?>/img/iowa.png" alt="Юниты Екатерины Иванчиковой">
 				</div>
 				<div class="junits-list owl-carousel">
 					<?php 
@@ -203,6 +230,7 @@
 								$query->the_post();
 							$id_mentors = get_field('junits_mentor');
 					?>
+					<?php $id_junit_post = get_the_ID(); ?>
 					<?php foreach($id_mentors as $id):
 						if($id == 78):
 					?>							
@@ -211,12 +239,18 @@
 						<div class="junit-card <?php if(get_post_meta( get_the_ID(), 'disable', true )){echo 'junit-disabled';} ?>">
 							
 							<div class="junit-card__photo">
-								<img class="lazy" data-original="img/guest.jpg" alt="Иванов Иван">
+								<img class="lazy" data-original="<?php echo get_template_directory_uri();?>/img/guest.jpg" alt="Иванов Иван">
 							</div>
 							<div class="junit-card-content">
 								<h4 class="junit-card-content__title">
 									<a href="<?php echo get_permalink(67); ?>" class="junit-page-link"><?php the_title(); ?></a>
 								</h4>
+								<div class="bang-show-raiting junit-raiting"><a class="rate_button" href="<?php echo get_permalink(67); ?>">Голосовать</a>
+									<div class="bang-show-raiting__title">Рейтинг:</div>
+									<?php if(function_exists('the_ratings')) { 
+										echo expand_ratings_template('<span class="rating">%RATINGS_IMAGES%</span><br>(<em><strong>%RATINGS_USERS%</strong> голосов, средний балл: <strong>%RATINGS_AVERAGE%</strong> из %RATINGS_MAX%</em>)', get_the_ID()); 
+									} ?>
+								</div>
 								<div class="junit-card-content__descr"><span>Состав:&nbsp;&nbsp;</span>
 									<?php $members = array();
 										if(get_post_meta( get_the_ID(), 'member_1', true )){
@@ -265,7 +299,7 @@
 					</div>
 				</div>
 				<div class="people-item-header">
-					<img class="lazy image-responsive" data-original="img/roshe.png" alt="Юниты NaviBand">
+					<img class="lazy image-responsive" data-original="<?php echo get_template_directory_uri();?>/img/naviband.png" alt="Юниты NaviBand">
 				</div>
 				<div class="junits-list owl-carousel">
 					<?php 
@@ -274,6 +308,7 @@
 								$query->the_post();
 							$id_mentors = get_field('junits_mentor');
 					?>
+					<?php $id_junit_post = get_the_ID(); ?>
 					<?php foreach($id_mentors as $id):
 						if($id == 77):
 					?>							
@@ -282,12 +317,18 @@
 						<div class="junit-card <?php if(get_post_meta( get_the_ID(), 'disable', true )){echo 'junit-disabled';} ?>">
 							
 							<div class="junit-card__photo">
-								<img class="lazy" data-original="img/guest.jpg" alt="Иванов Иван">
+								<img class="lazy" data-original="<?php echo get_template_directory_uri();?>/img/guest.jpg" alt="Иванов Иван">
 							</div>
 							<div class="junit-card-content">
 								<h4 class="junit-card-content__title">
 									<a href="<?php echo get_permalink(67); ?>" class="junit-page-link"><?php the_title(); ?></a>
 								</h4>
+								<div class="bang-show-raiting junit-raiting"><a class="rate_button" href="<?php echo get_permalink(67); ?>">Голосовать</a>
+									<div class="bang-show-raiting__title">Рейтинг:</div>
+									<?php if(function_exists('the_ratings')) { 
+										echo expand_ratings_template('<span class="rating">%RATINGS_IMAGES%</span><br>(<em><strong>%RATINGS_USERS%</strong> голосов, средний балл: <strong>%RATINGS_AVERAGE%</strong> из %RATINGS_MAX%</em>)', get_the_ID()); 
+									} ?>
+								</div>
 								<div class="junit-card-content__descr"><span>Состав:&nbsp;&nbsp;</span>
 									<?php $members = array();
 										if(get_post_meta( get_the_ID(), 'member_1', true )){
@@ -336,7 +377,7 @@
 					</div>
 				</div>
 				<div class="people-item-header">
-					<img class="lazy image-responsive" data-original="img/korg-png.png" alt="Юниты Дмитрия Колдуна">
+					<img class="lazy image-responsive" data-original="<?php echo get_template_directory_uri();?>/img/koldun.png" alt="Юниты Дмитрия Колдуна">
 				</div>
 				<div class="junits-list owl-carousel">
 					<?php 
@@ -345,6 +386,7 @@
 								$query->the_post();
 							$id_mentors = get_field('junits_mentor');
 					?>
+					<?php $id_junit_post = get_the_ID(); ?>
 					<?php foreach($id_mentors as $id):
 						if($id == 79):
 					?>							
@@ -353,12 +395,18 @@
 						<div class="junit-card <?php if(get_post_meta( get_the_ID(), 'disable', true )){echo 'junit-disabled';} ?>">
 							
 							<div class="junit-card__photo">
-								<img class="lazy" data-original="img/guest.jpg" alt="Иванов Иван">
+								<img class="lazy" data-original="<?php echo get_template_directory_uri();?>/img/guest.jpg" alt="Иванов Иван">
 							</div>
 							<div class="junit-card-content">
 								<h4 class="junit-card-content__title">
 									<a href="<?php echo get_permalink(67); ?>" class="junit-page-link"><?php the_title(); ?></a>
 								</h4>
+								<div class="bang-show-raiting junit-raiting"><a class="rate_button" href="<?php echo get_permalink(67); ?>">Голосовать</a>
+									<div class="bang-show-raiting__title">Рейтинг:</div>
+									<?php if(function_exists('the_ratings')) { 
+										echo expand_ratings_template('<span class="rating">%RATINGS_IMAGES%</span><br>(<em><strong>%RATINGS_USERS%</strong> голосов, средний балл: <strong>%RATINGS_AVERAGE%</strong> из %RATINGS_MAX%</em>)', get_the_ID()); 
+									} ?>
+								</div>
 								<div class="junit-card-content__descr"><span>Состав:&nbsp;&nbsp;</span>
 									<?php $members = array();
 										if(get_post_meta( get_the_ID(), 'member_1', true )){
